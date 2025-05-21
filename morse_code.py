@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog, scrolledtext
-import numpy
+import numpy as np
 from datetime import datetime
 import pygame
 import json
@@ -57,12 +57,12 @@ class MorseAudio:
     def _generate_sound(self, frequency, duration):
         sample_rate = 44100
         samples = int(sample_rate * duration / 1000.0)
-        buf = numpy.zeros((samples, 2), dtype=numpy.int16)
+        buf = np.zeros((samples, 2), dtype=np.int16)
         if frequency > 0:
             for s in range(samples):
                 t = float(s) / sample_rate
-                buf[s][0] = int(32767.0 * numpy.sin(2.0 * numpy.pi * frequency * t))
-                buf[s][1] = int(32767.0 * numpy.sin(2.0 * numpy.pi * frequency * t))
+                buf[s][0] = int(32767.0 * np.sin(2.0 * np.pi * frequency * t))
+                buf[s][1] = int(32767.0 * np.sin(2.0 * np.pi * frequency * t))
         return pygame.sndarray.make_sound(buf)
     
     def play_morse(self, code):
@@ -182,16 +182,7 @@ class AncientMorseOracle:
         self._show_welcome_message()
         
         # Initialize audio (lazy load)
-        try:
-            import numpy
-            self.audio_enabled = True
-        except ImportError:
-            self.audio_enabled = False
-            messagebox.showwarning(
-                "Audio Disabled", 
-                "Numpy not found. Audio features disabled.\n"
-                "Install with: pip install numpy"
-            )
+        self.audio_enabled = True
     
     def _load_icons(self):
         """Load ancient-style icons for the UI"""
