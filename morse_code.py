@@ -359,7 +359,13 @@ class AncientMorseOracle:
         output_frame = ttk.LabelFrame(main_frame, text=" Oracle's Revelation ", padding=10)
         output_frame.pack(fill=tk.BOTH, expand=True, pady=5)
         
-        
+        self.output_label = ttk.Label(
+        output_frame,
+        text="Oracle's Revelation",
+        font=("Segoe UI", 10, "bold")
+    )
+        self.output_label.pack(anchor="w", pady=(0, 5))
+
         self.output_text = scrolledtext.ScrolledText(
             output_frame,
             wrap=tk.WORD,
