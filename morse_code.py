@@ -19,7 +19,7 @@ from packaging import version
 # --- Constants ---
 APP_NAME = "🏛️ Ancient Morse Oracle 🏛️"
 VERSION = "1.0.0"
-AUTHOR = "The Cryptic Order of Telegraphic Mystics"
+AUTHOR = "Lefa Jele-Masemola"
 WELCOME_MESSAGE = (
     "Hearken, seeker of the ancient dots and dashes!\n"
     "The Oracle shall translate thy mortal words to the divine language of Morse,\n"
@@ -844,7 +844,7 @@ class AncientMorseOracle:
             "A mystical tool for communing with the ancient\n"
             "language of dots and dashes, used by oracles\n"
             "and telegraphic mystics throughout the ages.\n\n"
-            f"Created by: {AUTHOR}\n\n"
+            f"Consecrated by: {AUTHOR}\n\n"
             "May your messages travel swiftly through\n"
             "the aether as did those of old..."
         )
