@@ -271,12 +271,18 @@ class AncientMorseOracle:
     def _create_main_frame(self):
         """Create the main application frame with all widgets"""
         main_frame = ttk.Frame(self.root)
+        main_frame.grid(row=0, column=0, sticky="nsew")
+        self.root.rowconfigure(0, weight=1)
+        self.root.columnconfigure(0, weight=1)
+
         main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         # Title with ancient decoration
         title_frame = ttk.Frame(main_frame)
-        title_frame.pack(fill=tk.X, pady=(0, 10))
-        
+        title_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
+        main_frame.rowconfigure(0, weight=0)
+        main_frame.columnconfigure(0, weight=1)
+    
         self.title_label = ttk.Label(
             title_frame,
             text=APP_NAME,
@@ -295,7 +301,9 @@ class AncientMorseOracle:
         
         # Mode selection with ancient radio buttons
         mode_frame = ttk.LabelFrame(main_frame, text=" Direction of Prophecy ", padding=10)
-        mode_frame.pack(fill=tk.X, pady=5)
+        mode_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=5)
+        main_frame.rowconfigure(1, weight=0)
+
         
         self.mode_var = tk.StringVar(value="encode")
         
@@ -317,8 +325,10 @@ class AncientMorseOracle:
         
         # Input area
         input_frame = ttk.LabelFrame(main_frame, text=" Inscribe Thy Message ", padding=10)
-        input_frame.pack(fill=tk.BOTH, expand=True, pady=5)
-        
+        #input_frame.pack(fill=tk.BOTH, expand=True, pady=5)
+        input_frame.grid(row=2, column=0, sticky="nsew", padx=10, pady=5)
+        main_frame.rowconfigure(2, weight=1)  # Give input area some weight
+    
         self.input_label = ttk.Label(
             input_frame,
             text="Inscribe Thy Message",  
@@ -337,7 +347,9 @@ class AncientMorseOracle:
         
         # Action buttons
         button_frame = ttk.Frame(main_frame)
-        button_frame.pack(fill=tk.X, pady=5)
+        button_frame.grid(row=3, column=0, sticky="ew", padx=10, pady=5)
+        #button_frame.pack(fill=tk.X, pady=5)
+        main_frame.rowconfigure(3, weight=0)
         
         ttk.Button(
             button_frame,
@@ -361,7 +373,10 @@ class AncientMorseOracle:
         
         # Output area
         output_frame = ttk.LabelFrame(main_frame, text=" Oracle's Revelation ", padding=10)
-        output_frame.pack(fill=tk.BOTH, expand=True, pady=5)
+        #output_frame.pack(fill=tk.BOTH, expand=True, pady=5)
+        output_frame = ttk.LabelFrame(main_frame, text=" Oracle's Revelation ", padding=10)
+        output_frame.grid(row=4, column=0, sticky="nsew", padx=10, pady=5)
+        main_frame.rowconfigure(4, weight=3)  # Giving output area most of the space!
         
         self.output_label = ttk.Label(
         output_frame,
@@ -385,7 +400,7 @@ class AncientMorseOracle:
         self.output_text.config(state=tk.DISABLED) 
         self.output_text.pack(fill=tk.BOTH, expand=True)
     
-        self.output_text.pack(fill=tk.X, expand=False, ipady=100)
+        #self.output_text.pack(fill=tk.X, expand=False, ipady=100)
     
     def _create_status_bar(self):
         """Create the status bar at bottom of window"""
