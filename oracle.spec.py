@@ -6,7 +6,7 @@ block_cipher = None
 
 a = Analysis(
     ['morse_code.py'],
-    pathex=["C:\Users\Capaciti\OneDrive\MorseCode\morse_code.py"],
+    pathex=["C:/Users/Capaciti/OneDrive/MorseCode"],
     binaries=[],
     datas=collect_data_files('pygame', include_py_files=True) + [('assets/*', 'assets')],
     hiddenimports=[
@@ -39,7 +39,7 @@ exe = EXE(
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=True, 
+    console=False, 
     icon='assets/oracle_icon.ico',
     disable_windowed_traceback=False,
     target_arch=None,

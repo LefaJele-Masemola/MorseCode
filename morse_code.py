@@ -5,6 +5,7 @@ from datetime import datetime
 import pygame
 import json
 import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
 import sys
 from pathlib import Path
 from PIL import Image, ImageTk
