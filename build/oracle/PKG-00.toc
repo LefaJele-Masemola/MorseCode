@@ -1,4 +1,4 @@
-('C:\\Users\\Capaciti\\OneDrive\\MorseCode\\build\\oracle\\oracle.spec.pkg',
+('C:\\Users\\Capaciti\\OneDrive\\MorseCode\\build\\oracle\\AmcientMorseOracle.pkg',
  {'BINARY': True,
   'DATA': True,
   'EXECUTABLE': True,
