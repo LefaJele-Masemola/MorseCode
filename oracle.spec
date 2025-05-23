@@ -21,7 +21,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='oracle.spec',
+    name='AmcientMorseOracle',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
