@@ -169,6 +169,10 @@ class AncientMorseOracle:
         self.history = []
         self.current_file = None
         
+       
+        style = ttk.Style()
+        style.configure('Output.TLabelframe', background='#f0f0f0')
+        
         # Load ancient icon
         self._load_icons()
         
@@ -370,8 +374,14 @@ class AncientMorseOracle:
             output_frame,
             wrap=tk.WORD,
             font=("Courier New", 12),
-            state=tk.DISABLED
+            state=tk.NORMAL,
+            height=10,
+            background="#f8f8f8",
+            relief=tk.SUNKEN,
+            borderwidth=2
         )
+        self.output_text.insert(tk.END, "Translation will appear here...")
+        self.output_text.config(state=tk.DISABLED) 
         self.output_text.pack(fill=tk.BOTH, expand=True)
     
     def _create_status_bar(self):
@@ -466,10 +476,17 @@ class AncientMorseOracle:
             return
         
         try:
+            # Clearing of previous output first
+            self.output_text.config(state=tk.NORMAL)
+            self.output_text.delete("1.0", tk.END)
+        
             if self.mode_var.get() == "encode":
                 result = letters_to_morse(input_text)
+                # Adding extra space between letters for better readability
+                self.output_text.insert(tk.END, ' '.join(result.split()))
             else:
                 result = morse_to_letters(input_text)
+                self.output_text.insert(tk.END, result)
             
             self.output_text.config(state=tk.NORMAL)
             self.output_text.delete("1.0", tk.END)
