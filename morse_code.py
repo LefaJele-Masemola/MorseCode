@@ -161,7 +161,7 @@ class AncientMorseOracle:
         self.audio_enabled = True
         self.root.title(f"{APP_NAME} v{VERSION}")
         self.root.geometry("900x700")
-        self.root.minsize(800, 600)
+        self.root.minsize(1000, 800)
         
         # Initialize subsystems
         self.audio = MorseAudio()
@@ -373,10 +373,10 @@ class AncientMorseOracle:
         self.output_text = scrolledtext.ScrolledText(
             output_frame,
             wrap=tk.WORD,
-            font=("Courier New", 14),
+            font=("Courier New", 18),
             state=tk.NORMAL,
-            height=16,
-            width=70,
+            height=30,
+            width=100,
             bg="#f8f8f8",
             relief=tk.SUNKEN,
             borderwidth=2
@@ -384,6 +384,8 @@ class AncientMorseOracle:
         self.output_text.insert(tk.END, "Translation will appear here...")
         self.output_text.config(state=tk.DISABLED) 
         self.output_text.pack(fill=tk.BOTH, expand=True)
+    
+        self.output_text.pack(fill=tk.X, expand=False, ipady=100)
     
     def _create_status_bar(self):
         """Create the status bar at bottom of window"""
