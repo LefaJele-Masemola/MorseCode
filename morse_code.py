@@ -373,10 +373,11 @@ class AncientMorseOracle:
         self.output_text = scrolledtext.ScrolledText(
             output_frame,
             wrap=tk.WORD,
-            font=("Courier New", 12),
+            font=("Courier New", 14),
             state=tk.NORMAL,
-            height=10,
-            background="#f8f8f8",
+            height=16,
+            width=70,
+            bg="#f8f8f8",
             relief=tk.SUNKEN,
             borderwidth=2
         )
@@ -447,7 +448,8 @@ class AncientMorseOracle:
             bg=theme["text_bg"],
             fg=theme["text_fg"],
             insertbackground=theme["insert_bg"],
-            selectbackground=theme["select_bg"]
+            selectbackground=theme["select_bg"],
+            font=("Courier New", 14)  # Consistent larger font
         )
         
         # Label frames
@@ -476,17 +478,11 @@ class AncientMorseOracle:
             return
         
         try:
-            # Clearing of previous output first
-            self.output_text.config(state=tk.NORMAL)
-            self.output_text.delete("1.0", tk.END)
-        
             if self.mode_var.get() == "encode":
                 result = letters_to_morse(input_text)
-                # Adding extra space between letters for better readability
-                self.output_text.insert(tk.END, ' '.join(result.split()))
             else:
                 result = morse_to_letters(input_text)
-                self.output_text.insert(tk.END, result)
+              
             
             self.output_text.config(state=tk.NORMAL)
             self.output_text.delete("1.0", tk.END)
