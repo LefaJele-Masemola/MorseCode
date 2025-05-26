@@ -5,6 +5,7 @@ from datetime import datetime
 import pygame
 import json
 import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
 import sys
 from pathlib import Path
 from PIL import Image, ImageTk
@@ -19,7 +20,7 @@ from packaging import version
 # --- Constants ---
 APP_NAME = "🏛️ Ancient Morse Oracle 🏛️"
 VERSION = "1.0.0"
-AUTHOR = "The Cryptic Order of Telegraphic Mystics"
+AUTHOR = "Lefa Jele-Masemola"
 WELCOME_MESSAGE = (
     "Hearken, seeker of the ancient dots and dashes!\n"
     "The Oracle shall translate thy mortal words to the divine language of Morse,\n"
@@ -161,13 +162,17 @@ class AncientMorseOracle:
         self.audio_enabled = True
         self.root.title(f"{APP_NAME} v{VERSION}")
         self.root.geometry("900x700")
-        self.root.minsize(800, 600)
+        self.root.minsize(1000, 800)
         
         # Initialize subsystems
         self.audio = MorseAudio()
         self.themes = AncientThemes()
         self.history = []
         self.current_file = None
+        
+       
+        style = ttk.Style()
+        style.configure('Output.TLabelframe', background='#f0f0f0')
         
         # Load ancient icon
         self._load_icons()
@@ -267,12 +272,18 @@ class AncientMorseOracle:
     def _create_main_frame(self):
         """Create the main application frame with all widgets"""
         main_frame = ttk.Frame(self.root)
+        main_frame.grid(row=0, column=0, sticky="nsew")
+        self.root.rowconfigure(0, weight=1)
+        self.root.columnconfigure(0, weight=1)
+
         main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         # Title with ancient decoration
         title_frame = ttk.Frame(main_frame)
-        title_frame.pack(fill=tk.X, pady=(0, 10))
-        
+        title_frame.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
+        main_frame.rowconfigure(0, weight=0)
+        main_frame.columnconfigure(0, weight=1)
+    
         self.title_label = ttk.Label(
             title_frame,
             text=APP_NAME,
@@ -291,7 +302,9 @@ class AncientMorseOracle:
         
         # Mode selection with ancient radio buttons
         mode_frame = ttk.LabelFrame(main_frame, text=" Direction of Prophecy ", padding=10)
-        mode_frame.pack(fill=tk.X, pady=5)
+        mode_frame.grid(row=1, column=0, sticky="ew", padx=10, pady=5)
+        main_frame.rowconfigure(1, weight=0)
+
         
         self.mode_var = tk.StringVar(value="encode")
         
@@ -313,8 +326,10 @@ class AncientMorseOracle:
         
         # Input area
         input_frame = ttk.LabelFrame(main_frame, text=" Inscribe Thy Message ", padding=10)
-        input_frame.pack(fill=tk.BOTH, expand=True, pady=5)
-        
+        #input_frame.pack(fill=tk.BOTH, expand=True, pady=5)
+        input_frame.grid(row=2, column=0, sticky="nsew", padx=10, pady=5)
+        main_frame.rowconfigure(2, weight=1)  # Give input area some weight
+    
         self.input_label = ttk.Label(
             input_frame,
             text="Inscribe Thy Message",  
@@ -333,7 +348,9 @@ class AncientMorseOracle:
         
         # Action buttons
         button_frame = ttk.Frame(main_frame)
-        button_frame.pack(fill=tk.X, pady=5)
+        button_frame.grid(row=3, column=0, sticky="ew", padx=10, pady=5)
+        #button_frame.pack(fill=tk.X, pady=5)
+        main_frame.rowconfigure(3, weight=0)
         
         ttk.Button(
             button_frame,
@@ -357,16 +374,34 @@ class AncientMorseOracle:
         
         # Output area
         output_frame = ttk.LabelFrame(main_frame, text=" Oracle's Revelation ", padding=10)
-        output_frame.pack(fill=tk.BOTH, expand=True, pady=5)
+        #output_frame.pack(fill=tk.BOTH, expand=True, pady=5)
+        output_frame = ttk.LabelFrame(main_frame, text=" Oracle's Revelation ", padding=10)
+        output_frame.grid(row=4, column=0, sticky="nsew", padx=10, pady=5)
+        main_frame.rowconfigure(4, weight=3)  # Giving output area most of the space!
         
-        
+        self.output_label = ttk.Label(
+        output_frame,
+        text="Oracle's Revelation",
+        font=("Segoe UI", 10, "bold")
+    )
+        self.output_label.pack(anchor="w", pady=(0, 5))
+
         self.output_text = scrolledtext.ScrolledText(
             output_frame,
             wrap=tk.WORD,
-            font=("Courier New", 12),
-            state=tk.DISABLED
+            font=("Courier New", 18),
+            state=tk.NORMAL,
+            height=30,
+            width=100,
+            bg="#f8f8f8",
+            relief=tk.SUNKEN,
+            borderwidth=2
         )
+        self.output_text.insert(tk.END, "Translation will appear here...")
+        self.output_text.config(state=tk.DISABLED) 
         self.output_text.pack(fill=tk.BOTH, expand=True)
+    
+        #self.output_text.pack(fill=tk.X, expand=False, ipady=100)
     
     def _create_status_bar(self):
         """Create the status bar at bottom of window"""
@@ -431,7 +466,8 @@ class AncientMorseOracle:
             bg=theme["text_bg"],
             fg=theme["text_fg"],
             insertbackground=theme["insert_bg"],
-            selectbackground=theme["select_bg"]
+            selectbackground=theme["select_bg"],
+            font=("Courier New", 14)  # Consistent larger font
         )
         
         # Label frames
@@ -464,6 +500,7 @@ class AncientMorseOracle:
                 result = letters_to_morse(input_text)
             else:
                 result = morse_to_letters(input_text)
+              
             
             self.output_text.config(state=tk.NORMAL)
             self.output_text.delete("1.0", tk.END)
@@ -808,7 +845,7 @@ class AncientMorseOracle:
             "A mystical tool for communing with the ancient\n"
             "language of dots and dashes, used by oracles\n"
             "and telegraphic mystics throughout the ages.\n\n"
-            f"Created by: {AUTHOR}\n\n"
+            f"Consecrated by: {AUTHOR}\n\n"
             "May your messages travel swiftly through\n"
             "the aether as did those of old..."
         )
