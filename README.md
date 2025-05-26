@@ -7,7 +7,7 @@
 ## 🔮 Installation
 
 ### Windows
-1. Download the `AncientMorseOracle.exe` from the [Releases section](#)
+1. Download the `AncientMorseOracle.exe` from the [Releases section](#https://github.com/LefaJele-Masemola/MorseCode/releases)
 2. Place the executable in your desired location
 3. (Optional) Create a shortcut on your desktop
 
