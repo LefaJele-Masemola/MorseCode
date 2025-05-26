@@ -25,6 +25,7 @@
 - **Sacred Preservation**: Save your translations as oracle scrolls (`.mor` files)
 
 ## ⚡ Quick Start
+![Simsons Morse Code Animation](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzJldHNqdXhxdGRtZHZxbmdoNzY1enU4M2Z3Y20zNXIwaTBwaTNhYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6MbaW1djIapo0TGo/giphy.gif)
 
 1. **Choose your path**:
    - ☞ *Words to Morse*: For encoding normal text
