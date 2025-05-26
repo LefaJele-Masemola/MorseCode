@@ -2,6 +2,7 @@
 
 *"Decipher the language of the ancients through sacred dots and dashes..."*
 
+![image](https://github.com/user-attachments/assets/77d69e6e-5f7e-4cc7-bf9d-754e8122c776)
 
 
 ## 🔮 Installation
